@@ -91,6 +91,8 @@
                 this.success.info = true;
                 this.success.msg = this.messageInfo;
 
+                this.verifyEmail.state = true;
+
             }else if (this.$route.query.verify) {
 
                 this.verifyEmail.error = false;

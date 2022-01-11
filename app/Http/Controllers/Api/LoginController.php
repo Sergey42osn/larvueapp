@@ -27,6 +27,10 @@ class LoginController extends Controller
             ], 401);
         }
 
+        //dd('ok');
+
+       // dd(Auth::user());
+
         if (!Auth::user()->email_verified_at) {
 
             return response()->json([
@@ -37,10 +41,10 @@ class LoginController extends Controller
                 'error'     => 'verifyemail'
             ], 200);
 
-           // dd(Auth::user()->email_verified_at);
+            dd(Auth::user()->email_verified_at);
         }
 
-       // dd('stop');
+        //dd('stop');
 
         $token = Auth::user()->createToken(config('app.name'));
 
