@@ -1,6 +1,6 @@
 <template>
     <div class="component_container">
-        <div v-if="auth" class="wrapper_content">
+        <div v-if="authState" class="wrapper_content">
             <span>{{ user.name }}</span>
             <form v-on:submit.prevent="logoutForm" action="">
                 <button>Выйти</button>
@@ -39,6 +39,7 @@
         methods:{
              logedIn(){
 
+                 console.log('logedIn');
 
                      let url = "/api/v1/user";
 
@@ -61,7 +62,7 @@
                      
                     axios.get(url)
                     .then(response => {
-                      console.log(response.data);
+                     // console.log(response.data);
 
                       if (response.data.result == true) {
 
@@ -91,14 +92,15 @@
                      
                     axios.post(url)
                     .then(response => {
-                      console.log(response.data);
+                    //  console.log(response.data);
 
                       if (response.data.result == true) {
-                       console.log(response.data);
+                     //  console.log(response.data);
 
                        window.localStorage.setItem('token','');
 
                        this.user.name = false;
+                       this.user.admin = false;
 
                        this.$store.commit('UPDATE_AUTH_STATE',false);
                       }
@@ -109,10 +111,11 @@
         },
          computed:{
           authState(){
-             return this.$store.getters.authState;
+             // console.log(this.$store.getters.authState.state);
+             return this.$store.getters.authState.state;
           },
           auth(){
-             return this.authState.state;
+             return this.$store.getters.auth;
           }
         }
     }
