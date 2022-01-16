@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 
+use Auth;
+
 class IsAdmin
 {
     /**
@@ -15,6 +17,8 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
+		//dd($request);
+		
         if (Auth::user() &&  Auth::user()->is_admin == 1) {
              return $next($request);
         }
