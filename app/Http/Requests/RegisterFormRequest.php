@@ -29,4 +29,11 @@ class RegisterFormRequest extends FormRequest
             'password'  =>  'required|min:6'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'email.unique' => 'Такой E-mail уже есть в базе'
+        ];
+    }
 }
