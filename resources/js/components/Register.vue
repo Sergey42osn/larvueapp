@@ -10,7 +10,7 @@
                             <span class="text-danger" v-for="(value, name) in errors.info">{{ value[0] }}</span>
                             <span class="text-success" v-if="success.info">{{ success.info }}</span>
                         </div>
-                        <form v-on:submit.prevent="saveForm" class="form-horizontal" ref="form" id="form_reg" method="POST" novalidate="">
+                        <form v-on:submit.prevent="saveForm" class="form-horizontal form_register" ref="form" id="form_reg" method="POST" novalidate="">
                             
                             <input type="hidden" name="_token" :value="csrf">
                             <div class="form-group">
@@ -76,7 +76,6 @@
                             <div class="form-group">
 
                                 <div class="form-group_box">
-                                    <label for="">8(905)-905-00-00</label>
                                     <input id="phone"
                                             type="phone"
                                             class="form-control"
@@ -84,6 +83,7 @@
                                             v-on:click="chang($event)"
                                             v-on:change="chang($event)"
                                             v-on:keyup="keyup($event)"
+                                            v-on:keydown="keydown($event)"
                                             data-required="Введите телефон"
                                             placeholder="Введите телефон"
                                             required>
@@ -103,6 +103,7 @@
                                             v-model="password"
                                             v-on:click="chang($event)"
                                             v-on:change="chang($event)" 
+                                            v-on:keyup="keyup($event)"
                                             data-required="Введите пароль"
                                             placeholder="Введите пароль"
                                             required>
@@ -124,6 +125,7 @@
                                             v-model="password_confirmation"
                                             v-on:click="chang($event)"
                                             v-on:change="chang($event)"
+                                            v-on:keyup="keyup($event)"
                                             data-required="Подтвердите пароль"
                                             placeholder="Подтвердите пароль">
 
@@ -193,6 +195,7 @@
                     //console.log(this.password.length);
                     if (this.password.length < 6) {
                        this.errors[$name] = "Пароль не менее 6 символов"; 
+                       return;
                     }
                     if (this.password_confirmation == "") {
                         this.errors.password_confirmation = "Подтвердите пароль";
@@ -213,18 +216,40 @@
                        this.errors.password = "Пароль не менее 6 символов"; 
                     }
                 }
+                if ($name == "phone") {
+                    this.getPhoneMack(event)
+                }
                 let errors =false;
              //  console.log(this.errors);
             },
-            keyup(event){
-                //console.log(event.target.id);
-
+            keydown(event){
                 let $name = event.target.id;
 
                 if ($name == 'phone') {
 
                     this.getPhoneMack(event)
 
+                }
+            },
+            keyup(event){
+                //console.log(event.target.id);
+
+                let $name = event.target.id;
+
+               // console.log($name);
+
+                if ($name == 'phone') {
+
+                    this.getPhoneMack(event);
+
+                }
+                if($name == 'password'){
+                    
+                     this.chang(event);
+                }
+                if($name == 'password_confirmation'){
+                    
+                     this.chang(event);
                 }
 
                // console.log(length);
@@ -245,18 +270,24 @@
 
                 if (length <11) {
 
+                   //  console.log(length);
+
                   //  console.log(val);
 
                   //  console.log(length);
 
-                    this.errors[$name] = 'Поле должно содержать не менее 11 цифр';
+                    this.errors[$name] = 'Не менее 11 цифр';
 
-                    return;
-                }else{
+                    //return;
+                }else if(length == 11){
 
                     this.errors[$name] = false;
 
                     this.phone = val;
+
+                    event.preventDefault();
+
+                    return false;
 
                 }
 
@@ -267,7 +298,7 @@
             saveForm: function(event){
                 // event.preventDefault(e);
                  //console.log(event);
-               // console.log(this.password);
+               //console.log(this.phone.length);
 
                      this.info = false;
                      this.success.info = false;
@@ -287,6 +318,18 @@
                         this.errors.phone = "Введите телефон";
                         errors = true;
                     }
+                    if (this.phone) {
+                        let val_phone = this.phone;
+
+                        val_phone = val_phone.replace(/[^0-9]/giu,"");
+
+                       // console.log(val_phone);
+
+                        if(val_phone.length < 11){
+                            this.errors.phone = "Введите 11 цифр";
+                            errors = true;
+                        }
+                    }
                     if (this.email == "") {
                         this.errors.email = "Заполните e-mail";
                         errors = true;
@@ -305,7 +348,7 @@
                         return this.errors;
                     }
 
-                 if (this.password === this.password_confirmation)
+                if (this.password === this.password_confirmation)
                 {
                     //console.log(this.password);
                     let url = "/api/v1/register";
@@ -353,6 +396,22 @@
                              event.target.reset();
                         }
 
+                    }).catch(error => {
+                      //  console.log(error.response);
+                        if(error.response.data.errors){
+                          // console.log(error.response.data.errors);
+
+                           let err = error.response.data.errors;
+
+                           let $name = Object.keys(err);
+                           //console.log($name[0]); 
+                           let vals = Object.values(err);
+                          // console.log(vals[0][0]); 
+
+                           // console.log(this.errors.info);
+
+                            this.errors[$name[0]] = vals[0][0];
+                        }
                     });
                 } else {
                     
@@ -373,7 +432,27 @@
     }
 </script>
 <style>
+.form_register{
+    position: relative;
+}
 .help_block_validate {
     color: red;
+}
+@media(max-width: 768px) {
+    .panel-heading {
+  margin-bottom: 20px;
+}
+    .form-group_box {
+        position: relative;
+    }
+    .form-group {
+  margin-bottom: 2rem;
+}
+     .help-block {
+         top: -17px;
+        left: 0 !important;
+        transform: translate(0) !important;
+        font-size: 12px;
+    }
 }
 </style>

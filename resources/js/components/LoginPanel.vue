@@ -1,5 +1,5 @@
 <template>
-    <div class="component_container">
+    <div class="component_container login_panel">
         <div v-if="authState" class="wrapper_content">
             <span>{{ user.name }}</span>
             <form v-on:submit.prevent="logoutForm" action="">
@@ -7,6 +7,9 @@
             </form>
             <span v-if="user.admin">
               <router-link to="/admin" exact>Админ панель</router-link>
+            </span>
+			<span v-if="user.profil">
+              <router-link to="/profil" exact>Профиль</router-link>
             </span>
         </div>
         <div v-else class="wrapper_content">
@@ -25,6 +28,7 @@
                 user:{
                     name:"",
                     admin:false,
+					profil:false
                 }
             }
         },
@@ -120,3 +124,11 @@
         }
     }
 </script>
+
+<style>
+     @media(max-width: 768px) {
+        .component_container.login_panel {
+            display: none;
+        }
+    }
+</style>

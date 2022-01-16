@@ -1,11 +1,6 @@
 <template>
     <div class="component_container component_map">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="google-map" ref="googleMap" style="width: 100%;height:440px">
-                </div>
-            </div>
-        </div>
+        <div class="google-map" ref="googleMap" style="width: 100%"></div>
     </div>
 </template>
 
@@ -22,6 +17,10 @@
             return {
                // google: null,
                //auth:false,
+               barbottmmenu:{
+                    menu:false,
+                    map:true
+                },
                cords:{
                   1:{
                      lat:53.614,
@@ -252,5 +251,10 @@
 <style>
   .component_map {
     width: 100%;
+}
+ @media(max-width: 768px) {
+   .google-map{
+     height: 93vh;
+   }
 }
 </style>
