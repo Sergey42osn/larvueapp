@@ -20,6 +20,7 @@ class CreateDriversTable extends Migration
             $table->string('phone');
             $table->integer('id_car')->unsigned();
             $table->boolean('confirmed')->default(0);
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

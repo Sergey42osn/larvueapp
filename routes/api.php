@@ -15,25 +15,50 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/email','Api\EmailController\@email');
+//Route::get('/email','Api\EmailController\@email');
+
+Route::group(['prefix' => '/cors','namespace' => 'Cors','middleware' => ['cors']], function () {
+	//Route::post('/login', 'CorsController@cors');
+
+	//Route::get('/check', 'CorsController@check');
+});
 
 Route::group(['prefix' => '/v1','namespace' => 'Api','middleware' => ['api'], 'as' => 'api.'], function () {
 
   	Route::post('/register', 'RegisterController@register');
 	Route::post('/login', 'LoginController@login');
 
+	//Route::post('/cors/login', 'CorsController@cors')->middleware('cors');
+
 	Route::get('/email/verify/{id}/{hash}','VerificationController@verify')->name('verification.verify');
 
 	//Route::get('/email/verify','VerificationController@verify')->name('email-verify');
 	Route::get('/email/verify/check','VerificationController@check');
 
-	Route::post('/email/resend','VerificationController@resend');
-
-	Route::post('cors/login', 'CorsController@cors');   
+	Route::post('/email/resend','VerificationController@resend');   
 
 	Route::post('/logout', 'LoginController@logout')->middleware('auth:api');
 
+	Route::post('/cors/login', 'CorsController@cors');
+
+
 	Route::middleware('auth:api')->group(function () {
+
+		Route::group(['prefix' => '/cors','namespace' => 'Cors','middleware' => ['cors']], function () {
+			//Route::post('/login', 'CorsController@cors');
+	
+			Route::get('/check', 'CorsController@check');
+
+			Route::post('/sendCords', 'CordsCarController@saveCords');
+
+			//Route::post('/work/{id}', 'WorksController@saveCords');
+
+			///Route::resource('works', 'WorkController');
+
+			Route::get('/works', 'WorkController@index');
+
+			Route::post('/works', 'WorkController@creat');
+		});
 
 	    Route::get('user', 'LoginController@user');
 
@@ -71,9 +96,9 @@ Route::group(['prefix' => '/v1','namespace' => 'Api','middleware' => ['api'], 'a
 
 	    Route::get('/getcords', 'CordsCarController@getCordsCars');
 
-	    Route::post('cors/check', 'CorsController@check');
+	    //Route::post('cors/check', 'CorsController@check');
 
-	    Route::post('cors/cords', 'CordsCarController@saveCorsCordCar');
+	   // Route::post('cors/cords', 'CordsCarController@saveCorsCordCar');
 
 	});	
 

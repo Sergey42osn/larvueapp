@@ -8,7 +8,11 @@
             <span v-if="user.admin">
               <router-link to="/admin" exact>Админ панель</router-link>
             </span>
+<<<<<<< HEAD
 			<span v-if="user.profil">
+=======
+            <span v-if="user.profil">
+>>>>>>> 254593ba722d1f8c74e2aa339821f5a9875f4725
               <router-link to="/profil" exact>Профиль</router-link>
             </span>
         </div>
@@ -28,7 +32,11 @@
                 user:{
                     name:"",
                     admin:false,
+<<<<<<< HEAD
 					profil:false
+=======
+                    profil:false
+>>>>>>> 254593ba722d1f8c74e2aa339821f5a9875f4725
                 }
             }
         },

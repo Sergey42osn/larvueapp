@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 
 namespace App\Http\Middleware;
@@ -26,3 +27,32 @@ class IsAdmin
         return back();
     }
 }
+=======
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Auth;
+
+class IsAdmin
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        //dd($request);
+
+        if (Auth::user() &&  Auth::user()->is_admin == 1) {
+             return $next($request);
+        }
+
+        return back();
+    }
+}
+>>>>>>> 254593ba722d1f8c74e2aa339821f5a9875f4725
