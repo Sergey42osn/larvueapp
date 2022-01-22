@@ -8,6 +8,9 @@
             <span v-if="user.admin">
               <router-link to="/admin" exact>Админ панель</router-link>
             </span>
+            <span v-if="user.profil">
+              <router-link to="/profil" exact>Профиль</router-link>
+            </span>
         </div>
         <div v-else class="wrapper_content">
             <router-link to="/login" exact>Войти</router-link>
@@ -25,6 +28,7 @@
                 user:{
                     name:"",
                     admin:false,
+                    profil:false
                 }
             }
         },

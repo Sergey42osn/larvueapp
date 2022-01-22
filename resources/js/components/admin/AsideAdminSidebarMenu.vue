@@ -20,6 +20,16 @@
         		</ul>
         	</div>
         </div>
+		  <div class="nav_sidebar_item">
+        	<a @click.prevent="showNextItem(items.drivers.id)" href="#">Водители<span class="arrow_down"></span></a>
+        	<div class="nav_sidebar_item_child hide" v-bind:class="isActive === items.drivers.id?'active':''">
+        		<ul>
+        			<li>
+        				<a href="#" v-on:click.prevent="addDrivers(items.drivers.id)">Добавить водителя</a>
+        			</li>
+        		</ul>
+        	</div>
+        </div>
     </div>
 </template>
 

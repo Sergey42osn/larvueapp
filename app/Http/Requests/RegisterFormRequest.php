@@ -22,11 +22,18 @@ class RegisterFormRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
+    {   
         return [
             'name'      =>  'required',
             'email'     =>  'required|email|unique:users',
             'password'  =>  'required|min:6'
+        ];
+    }
+
+    public function messages()
+{
+        return [
+            'email.unique' => 'Такой E-mail уже есть в базе'
         ];
     }
 }

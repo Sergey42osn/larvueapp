@@ -41,7 +41,7 @@ class LoginController extends Controller
                 'error'     => 'verifyemail'
             ], 200);
 
-            dd(Auth::user()->email_verified_at);
+           // dd(Auth::user()->email_verified_at);
         }
 
         //dd('stop');
