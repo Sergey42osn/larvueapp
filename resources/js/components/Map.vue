@@ -68,6 +68,8 @@
                 title:"Hello World!"
             });
 
+            this.infoWindow = new google.maps.InfoWindow();
+
              //this.setMarkers();
 
              // this.marker.setMap(null);
