@@ -5,8 +5,10 @@ export default{
 	     	console.log(data);
 
 	     if (data) {
-	     	state.authState.state = data;
-	     }
+	     	state.authState.state = true;
+	     }else{
+			state.authState.state = false;
+		  }
 
 	      //console.log(state.pages);
 	    },
