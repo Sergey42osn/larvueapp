@@ -121,9 +121,9 @@
 
             this.polling = setInterval(() => {
 
-              console.log(this.$route.path);
+              //console.log(this.$route.path);
 
-              console.log('111');
+              //console.log('111');
              // this.sendCordCar();
 
              if (!this.authState.state) {
@@ -167,7 +167,7 @@
 
                // console.log(response.data.data);
                
-                if (response.data.status == 200) {
+                if (response.data.result) {
 
                    console.log(response.data.data);
 
@@ -181,6 +181,12 @@
           },
           setMarkers(){
 
+           // console.log('setmarkers');
+
+            if(this.markers.length == 0){
+              return;
+            }
+
             console.log(this.markers);
             this.markers.forEach(markerInfo =>{
 
@@ -188,13 +194,13 @@
 
               if (!this.mapMarkers[markerInfo.id_car]) {
 
-               // this.addOneMarker(markerInfo);
+               this.addOneMarker(markerInfo);
 
               }else{
 
                 var positionM = {lat:parseFloat(markerInfo.lat),lng:parseFloat(markerInfo.lng)};
 
-                //this.mapMarkers[markerInfo.id_car].setPosition(positionM);
+                this.mapMarkers[markerInfo.id_car].setPosition(positionM);
 
               }
 
@@ -212,6 +218,7 @@
 
              this.mapMarkers[markerInfo.id_car] = new google.maps.Marker({
                   position: positionM,
+                  icon:'/images/car.png',
                   title: title.toString()
               });
 
@@ -242,7 +249,7 @@
         },
         watch: {
          markers: function () {
-              //this.setMarkers();
+              this.setMarkers();
           }
         }
     }

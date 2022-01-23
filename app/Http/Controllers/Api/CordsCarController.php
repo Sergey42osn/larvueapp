@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Cord;
 
+use App\Work;
+
 class CordsCarController extends Controller
 {
     public function saveCordCar(Request $request)
@@ -26,33 +28,21 @@ class CordsCarController extends Controller
 
     public function getCordsCars()
     {
-    	$rows = Cord::whereBetween('created_at', [now()->subSeconds(30), now()])->get();
+    	//$rows = Cord::whereBetween('created_at', [now()->subSeconds(30), now()])->get();
 
     	//dd($rows);
 
+		 $rows = Work::all();
+
     	if ($rows) {
 
-    		$data = [];
-
-    		foreach ($rows as $key => $row) {
-
-	    		$data[] = [
-	    			'id_car'	=> $row->id_car,
-	    			'lat'		=>	$row->lat,
-	    			'lng'		=>	$row->lng
-	    		];
-
-    		}
-
-	    	//dd($data);
+			return response()->json([
+				'result' => true,
+				'data'	=> $rows
+			],200);
 
     	}
 
-    	return response()->json([
-							'status' => 200,
-							'result' => true,
-							'data'	=> $data
-						]);
     }
 
     public function saveCorsCordCar(Request $request)
