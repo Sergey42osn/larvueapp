@@ -252,6 +252,9 @@
   .component_map {
     width: 100%;
 }
+.google-map{
+     height: 93vh;
+   }
  @media(max-width: 768px) {
    .google-map{
      height: 93vh;

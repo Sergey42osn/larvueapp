@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-sm-6 mx-auto">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h3>Регистрация</h3></div>
+                    <div class="panel-heading register"><h3>Регистрация</h3></div>
 
                     <div class="panel-body">
                         <div v-if="info" class="info info">
@@ -435,21 +435,26 @@
 .form_register{
     position: relative;
 }
+.panel-heading.register {
+  margin: 20px 0 30px;
+  text-align: center;
+}
 .help_block_validate {
     color: red;
 }
-@media(max-width: 768px) {
-    .panel-heading {
-  margin-bottom: 20px;
+.form-group {
+    justify-content: center;
 }
+@media(max-width: 768px) {
     .form-group_box {
         position: relative;
     }
     .form-group {
+        justify-content: center;
   margin-bottom: 2rem;
 }
      .help-block {
-         top: -17px;
+         top: -20px;
         left: 0 !important;
         transform: translate(0) !important;
         font-size: 12px;

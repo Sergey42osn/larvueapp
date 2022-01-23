@@ -288,4 +288,12 @@ import axios from 'axios';
 ..wrapper_info.success p {
     color:green;
 }
+
+@media(max-width: 768px) {
+.panel-heading {
+  margin: 20px 0;
+  text-align: center;
+  font-size: 20px;
+}
+}
 </style>
