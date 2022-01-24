@@ -14,7 +14,7 @@ class CreateCategoriesCarsTable extends Migration
     public function up()
     {
         Schema::create('categories_cars', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('name_category');
             $table->timestamps();
         });

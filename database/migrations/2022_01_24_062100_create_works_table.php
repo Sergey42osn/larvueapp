@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class GreatWorksTable extends Migration
+class CreateWorksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +14,13 @@ class GreatWorksTable extends Migration
     public function up()
     {
         Schema::create('works', function (Blueprint $table) {
-            $table->id()->autoIncrement();
-            $table->integer('id_car')->unsigned();
+            $table->increments('id');
+            $table->integer('id_car')->nullable();
+            $table->string('name',20)->nullable();
+            $table->string('phone',11)->nullable();
+            $table->decimal('lat', 15, 8)->nullable();
+            $table->decimal('lng', 15, 8)->nullable();
             $table->boolean('status')->default(0);
-            $table->decimal('lat', 15, 8);
-            $table->decimal('lng', 15, 8);
             $table->timestamps();
         });
     }

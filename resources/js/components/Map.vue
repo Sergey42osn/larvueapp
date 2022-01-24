@@ -63,20 +63,9 @@
                 ...this.mapOptions
             });
 
-             this.marker = new google.maps.Marker({
-                position: this.myLatlng,
-                title:"Hello World!"
-            });
+            this.marker = new google.maps.Marker();
 
             this.infoWindow = new google.maps.InfoWindow();
-
-             //this.setMarkers();
-
-             // this.marker.setMap(null);
-            this.marker.setMap(this.map);
-
-            // To add the marker to the map, call setMap();
-           this.marker.setMap(this.map);
 
             if (navigator.geolocation) {
               navigator.geolocation.getCurrentPosition(
@@ -85,6 +74,7 @@
                     lat: position.coords.latitude,
                     lng: position.coords.longitude,
                   };
+                  this.marker.setPosition(pos);
                   this.infoWindow.setPosition(pos);
                   this.infoWindow.setContent("Ваше местоположение.");
                   this.infoWindow.open(this.map);
@@ -123,19 +113,12 @@
 
             this.polling = setInterval(() => {
 
-              //console.log(this.$route.path);
-
-              //console.log('111');
-             // this.sendCordCar();
-
              if (!this.authState.state) {
               clearInterval(this.polling);
               return;
              }
 
              this.getCordsCars();
-
-              //this.setMarkers();
 
             }, 15000)
           },
@@ -146,8 +129,6 @@
             this.cords[2].lng = this.cords[2].lng + 0.001;
 
             let url = "/api/v1/cords";
-
-            //console.log(this.idcar);
                  
               axios.post(url,{
                 cords:this.cords
@@ -166,8 +147,6 @@
                  
               axios.get(url)
               .then(response => {
-
-               // console.log(response.data.data);
                
                 if (response.data.result) {
 
@@ -182,8 +161,6 @@
               });
           },
           setMarkers(){
-
-           // console.log('setmarkers');
 
             if(this.markers.length == 0){
               return;

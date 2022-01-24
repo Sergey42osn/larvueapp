@@ -14,7 +14,7 @@ class CreateNameCarsTable extends Migration
     public function up()
     {
         Schema::create('name_cars', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
 			$table->string('name_car');
 			$table->integer('id_model');
 			$table->integer('id_category');
