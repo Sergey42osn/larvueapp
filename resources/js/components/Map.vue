@@ -86,7 +86,7 @@
                     lng: position.coords.longitude,
                   };
                   this.infoWindow.setPosition(pos);
-                  this.infoWindow.setContent("Location found.");
+                  this.infoWindow.setContent("Ваше местоположение.");
                   this.infoWindow.open(this.map);
                   this.map.setCenter(pos);
                 },
