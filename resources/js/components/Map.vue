@@ -63,11 +63,11 @@
                 ...this.mapOptions
             });
 
-            this.marker = new google.maps.Marker({
+            /*this.marker = new google.maps.Marker({
                 position: {lat:53.85,lng:86.62},
                // icon:'/images/car.png',
                 title:"Hello World!"
-            });
+            });*/
 
             console.log(this.marker);
 
@@ -110,7 +110,7 @@
                  
               axios.get(url)
               .then(response => {
-                console.log(response.data);
+               // console.log(response.data);
               });
           },
           pollData () {
@@ -141,7 +141,7 @@
                // idcar:this.idcar
               })
               .then(response => {
-                console.log(response.data);
+              //  console.log(response.data);
 
                this.getCordsCars();
               });
@@ -156,11 +156,11 @@
                
                 if (response.data.result) {
 
-                   console.log(response.data.data);
+                  // console.log(response.data.data);
 
                    this.markers = response.data.data;
 
-                   console.log(this.markers);
+                  // console.log(this.markers);
 
                    //this.setMarkers();
                 }
@@ -172,14 +172,12 @@
               return;
             }
 
-            this.marker.setMap(this.map);
-
-            console.log(this.markers);
+           // console.log(this.markers);
             this.markers.forEach(markerInfo =>{
 
-              console.log(markerInfo.id_car);
+            //  console.log(markerInfo.id_car);
 
-              console.log(this.mapMarkers[markerInfo.id_car]);
+            //  console.log(this.mapMarkers[markerInfo.id_car]);
 
               if (typeof this.mapMarkers[markerInfo.id_car] === 'undefined') {
 
@@ -203,7 +201,7 @@
 
             var myLatlng = new google.maps.LatLng(parseFloat(markerInfo.lat),parseFloat(markerInfo.lng));
 
-            console.log(myLatlng);
+           // console.log(myLatlng);
 
            // var positionM = {lat:parseFloat(markerInfo.lat),lng:parseFloat(markerInfo.lng)};
 
@@ -216,7 +214,7 @@
                   title: title
               });
 
-              console.log(this.mapMarkers[markerInfo.id_car]);
+            //  console.log(this.mapMarkers[markerInfo.id_car]);
 
               this.mapMarkers[markerInfo.id_car].setMap(this.map);
 
