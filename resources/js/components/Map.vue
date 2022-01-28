@@ -63,7 +63,13 @@
                 ...this.mapOptions
             });
 
-            this.marker = new google.maps.Marker();
+            this.marker = new google.maps.Marker({
+                position: {lat:53.85,lng:86.62},
+               // icon:'/images/car.png',
+                title:"Hello World!"
+            });
+
+            console.log(this.marker);
 
             this.infoWindow = new google.maps.InfoWindow();
 
@@ -166,12 +172,16 @@
               return;
             }
 
+            this.marker.setMap(this.map);
+
             console.log(this.markers);
             this.markers.forEach(markerInfo =>{
 
-              console.log(markerInfo.lat);
+              console.log(markerInfo.id_car);
 
-              if (!this.mapMarkers[markerInfo.id_car]) {
+              console.log(this.mapMarkers[markerInfo.id_car]);
+
+              if (typeof this.mapMarkers[markerInfo.id_car] === 'undefined') {
 
                this.addOneMarker(markerInfo);
 
@@ -191,15 +201,22 @@
           },
           addOneMarker(markerInfo){
 
-            var positionM = {lat:parseFloat(markerInfo.lat),lng:parseFloat(markerInfo.lng)};
+            var myLatlng = new google.maps.LatLng(parseFloat(markerInfo.lat),parseFloat(markerInfo.lng));
 
-              var title = markerInfo.id_car;
+            console.log(myLatlng);
+
+           // var positionM = {lat:parseFloat(markerInfo.lat),lng:parseFloat(markerInfo.lng)};
+
+              var title = markerInfo.name;
 
              this.mapMarkers[markerInfo.id_car] = new google.maps.Marker({
-                  position: positionM,
+                  position: myLatlng,
                   icon:'/images/car.png',
-                  title: title.toString()
+                 // map:this.map,
+                  title: title
               });
+
+              console.log(this.mapMarkers[markerInfo.id_car]);
 
               this.mapMarkers[markerInfo.id_car].setMap(this.map);
 

@@ -38,6 +38,7 @@ class CordsCarController extends Controller
 
 			return response()->json([
 				'result' => true,
+				'test'	=>true,
 				'data'	=> $rows
 			],200);
 

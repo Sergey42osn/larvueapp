@@ -19,7 +19,7 @@ class CordsCarController extends Controller
     		//dd($row);
 			 $res = Work::where('id_car', $request['id_car'])
 			 ->update(['lat' => $request['latitude'],
-			 				'lng' => $request['latitude']			
+			 				'lng' => $request['longitude']			
 						]);
 
 			if($res){
