@@ -62,6 +62,7 @@ class CorsController extends Controller
 
         $user = [
             'id_driver' => $request->user()->id_driver,
+            'name' => $request->user()->name,
             'id_car' => $request->user()->id_car,
             'phone' => $phone ? $phone : ''
         ];

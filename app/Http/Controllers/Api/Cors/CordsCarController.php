@@ -5,21 +5,25 @@ namespace App\Http\Controllers\Api\Cors;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Cord;
+use App\Work;
 
 class CordsCarController extends Controller
 {
     public function saveCords(Request $request)
     {
+		/*return response()->json(['result' => true,
+		'id_car' 	=> $request['id_car'],
+		'lat'		=> $request['latitude'],
+		'lng'		=> $request['longitude']
+										]);*/
     		//dd($row);
-   		$res = Cord::create([
-						'id_car' 	=> $request->id_car,
-						'lat'		=> $request->latitude,
-						'lng'		=> $request->longitude,
-						'id_status'	=> 1
-					]);
+			 $res = Work::where('id_car', $request['id_car'])
+			 ->update(['lat' => $request['latitude'],
+			 				'lng' => $request['latitude']			
+						]);
 
 			if($res){
-				return response()->json(['result' => true]);
+				return response()->json(['result' => true,'data' => $res]);
 			}else{
 				return response()->json(['result' => false, 'data' => $res]);
 			}

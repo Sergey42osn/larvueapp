@@ -15,21 +15,46 @@ class WorkController extends Controller
      ], 200);
    }
 
-   public function creat(Request $request){
+   public function create(Request $request){
 
-      if($request->status){
+     /* return response()->json([
+         'user' => $request['user']['id_car']
+     ], 200);*/
+
+      if($request['user']){
+        // $res_decode = json_decode($request['user']);
+
+         $res = Work::create([
+            'id_car' 	=> $request['user']['id_car'],
+            'phone'     => $request['user']['phone'],
+            'name'     => $request['user']['name'],
+				'status'	   => 1
+         ]);
+
+         $data = [
+            'result'    => true,
+            'data'      => $res,
+            'user'      => $request['user']
+         ];
+
+      }else{
+         $data = [
+            'result'    => false,
+            'data'      => $res,
+            'user'      => $request['user']
+         ];
+
+      }
+
+      /*if($request->user){
          Work::create([
             'id_car' 	=> $request->id_car,
 				'lat'		   => $request->latitude,
 				'lng'		   => $request->longitude,
 				'status'	   => $request->status
          ]);
-      }
+      }*/
 
-      return response()->json([
-         'result' => true,
-         'message' => 'Неправильный логин или пароьль',
-         'data' => 'creat'
-     ], 200);
+      return response()->json($data, 200);
    }
 }
