@@ -63,11 +63,7 @@
                 ...this.mapOptions
             });
 
-            /*this.marker = new google.maps.Marker({
-                position: {lat:53.85,lng:86.62},
-               // icon:'/images/car.png',
-                title:"Hello World!"
-            });*/
+            this.marker = new google.maps.Marker();
 
             console.log(this.marker);
 
