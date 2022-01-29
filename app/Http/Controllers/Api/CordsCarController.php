@@ -32,7 +32,7 @@ class CordsCarController extends Controller
 
     	//dd($rows);
 
-		 $rows = Work::all();
+		 $rows = Work::where(['status' => 1])->get();
 
     	if ($rows) {
 

@@ -17,12 +17,6 @@ use Illuminate\Support\Facades\Route;
 
 //Route::get('/email','Api\EmailController\@email');
 
-Route::group(['prefix' => '/cors','namespace' => 'Cors','middleware' => ['cors']], function () {
-	//Route::post('/login', 'CorsController@cors');
-
-	//Route::get('/check', 'CorsController@check');
-});
-
 Route::group(['prefix' => '/v1','namespace' => 'Api','middleware' => ['api'], 'as' => 'api.'], function () {
 
   	Route::post('/register', 'RegisterController@register');
@@ -41,10 +35,11 @@ Route::group(['prefix' => '/v1','namespace' => 'Api','middleware' => ['api'], 'a
 
 	Route::post('/cors/login', 'CorsController@cors');
 
+	//Route::post('/cors/works/update', 'WorkController@update')->middleware(['auth:api','cors']);
 
 	Route::middleware('auth:api')->group(function () {
 
-		Route::group(['prefix' => '/cors','namespace' => 'Cors','middleware' => ['cors']], function () {
+		Route::group(['prefix' => '/cors','namespace' => 'Cors','middleware' => ['cors', 'json.response']], function () {
 			//Route::post('/login', 'CorsController@cors');
 	
 			Route::get('/check', 'CorsController@check');
@@ -58,6 +53,9 @@ Route::group(['prefix' => '/v1','namespace' => 'Api','middleware' => ['api'], 'a
 			Route::get('/works', 'WorkController@index');
 
 			Route::post('/works', 'WorkController@create');
+
+			Route::post('/works/update', 'WorkController@update');
+
 		});
 
 	    Route::get('user', 'LoginController@user');

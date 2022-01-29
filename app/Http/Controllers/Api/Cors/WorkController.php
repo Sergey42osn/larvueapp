@@ -24,12 +24,12 @@ class WorkController extends Controller
       if($request['user']){
         // $res_decode = json_decode($request['user']);
 
-         $res = Work::create([
-            'id_car' 	=> $request['user']['id_car'],
-            'phone'     => $request['user']['phone'],
+         $res = Work::updateOrCreate([
+            'id_car' 	=> $request['user']['id_car']],
+           ['phone'     => $request['user']['phone'],
             'name'     => $request['user']['name'],
-				'status'	   => 1
-         ]);
+				'status'	   => 1]
+         );
 
          $data = [
             'result'    => true,
@@ -54,6 +54,30 @@ class WorkController extends Controller
 				'status'	   => $request->status
          ]);
       }*/
+
+      return response()->json($data, 200);
+   }
+
+   public function update(Request $request)
+   {
+     // return response()->json(['result' => true], 200);
+
+      $res = Work::where('id_car', $request['id_car'])
+			 ->update(['status' => $request['status']]);
+
+      if($res){
+
+         $data = [
+            'result' => true
+         ];
+
+      }else{
+
+         $data = [
+            'result' => false
+         ];
+
+      }
 
       return response()->json($data, 200);
    }
