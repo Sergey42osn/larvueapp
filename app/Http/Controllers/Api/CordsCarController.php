@@ -34,6 +34,7 @@ class CordsCarController extends Controller
 
 		 $rows = Work::where(['status' => 1])->get();
 
+
     	if ($rows) {
 
 			return response()->json([
