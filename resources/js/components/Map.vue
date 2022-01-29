@@ -175,6 +175,8 @@
 
             //  console.log(this.mapMarkers[markerInfo.id_car]);
 
+              //if()
+
               if (typeof this.mapMarkers[markerInfo.id_car] === 'undefined') {
 
                this.addOneMarker(markerInfo);
