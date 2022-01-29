@@ -17,17 +17,20 @@ class WorkController extends Controller
 
    public function create(Request $request){
 
-     /* return response()->json([
-         'user' => $request['user']['id_car']
+     /*return response()->json([
+         'user' => $request['user']['phone']
      ], 200);*/
 
       if($request['user']){
         // $res_decode = json_decode($request['user']);
 
-         $res = Work::updateOrCreate([
-            'id_car' 	=> $request['user']['id_car']],
-           ['phone'     => $request['user']['phone'],
-            'name'     => $request['user']['name'],
+        $phone = $request['user']['phone'];
+        $name = $request['user']['name'];
+
+         $res = Work::updateOrCreate(
+            ['id_car' 	=> $request['user']['id_car']],
+           ['phone'     => $phone,
+            'name'     => $name,
 				'status'	   => 1]
          );
 
