@@ -124,24 +124,6 @@
 
             }, 15000)
           },
-          sendCordCar(){
-
-            this.cords[1].lat = this.cords[1].lat + 0.001;
-
-            this.cords[2].lng = this.cords[2].lng + 0.001;
-
-            let url = "/api/v1/cords";
-                 
-              axios.post(url,{
-                cords:this.cords
-               // idcar:this.idcar
-              })
-              .then(response => {
-              //  console.log(response.data);
-
-               this.getCordsCars();
-              });
-          },
           getCordsCars(){
             let url = "/api/v1/getcords";
 
@@ -165,32 +147,71 @@
           setMarkers(){
 
             if(this.markers.length == 0){
-              return;
+			
+				if(this.mapMarkers.length == 0){
+				
+					//return;
+				}
+				
             }
+			
+			this.markers.forEach(markerInfo =>{
 
-           // console.log(this.markers);
-            this.markers.forEach(markerInfo =>{
+					//  console.log(markerInfo.id_car);
 
-            //  console.log(markerInfo.id_car);
+					//  console.log(this.mapMarkers[markerInfo.id_car]);
 
-            //  console.log(this.mapMarkers[markerInfo.id_car]);
+					  if (typeof this.mapMarkers[markerInfo.id_car] === 'undefined') {
 
-              //if()
+					   this.addOneMarker(markerInfo);
 
-              if (typeof this.mapMarkers[markerInfo.id_car] === 'undefined') {
+					  }else{
+					  
+						var positionM = {lat:parseFloat(markerInfo.lat),lng:parseFloat(markerInfo.lng)};
 
-               this.addOneMarker(markerInfo);
+						this.mapMarkers[markerInfo.id_car].setPosition(positionM);
+						
+						this.mapMarkers[markerInfo.id_car].setMap(this.map);
+					  
+					  }
 
-              }else{
+				});
+				
+				//console.log(this.mapMarkers);
+				
+				if(this.markers.length == 0){
+				
+					this.mapMarkers.forEach(item => {
+				
+					//console.log(item);
+				
+						this.mapMarkers[item.id].setMap(null);
+						
+						//this.mapMarkers.splice(item.id, 1);
+				
+				});
+				
+					this.mapMarkers = [];
+					
+					return;
+				
+				}
 
-                var positionM = {lat:parseFloat(markerInfo.lat),lng:parseFloat(markerInfo.lng)};
-
-                this.mapMarkers[markerInfo.id_car].setPosition(positionM);
-
-              }
-
-            });
-            
+			    //console.log(this.mapMarkers);
+			
+				this.mapMarkers.forEach(item => {
+				
+					//console.log(item);
+				
+					let obj = this.markers.find(o => o.id_car === item.id);
+					
+					//console.log(obj);
+					
+					if(typeof obj === 'undefined'){
+						this.mapMarkers[item.id].setMap(null);
+					}
+				
+				});            
 
              // this.marker.setPosition(this.myLatlng);
 
@@ -209,6 +230,7 @@
                   position: myLatlng,
                   icon:'/images/car.png',
                  // map:this.map,
+				 id:markerInfo.id_car,
                   title: title
               });
 
