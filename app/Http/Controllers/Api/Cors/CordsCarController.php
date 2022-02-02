@@ -18,9 +18,9 @@ class CordsCarController extends Controller
 										]);*/
     		//dd($row);
 			 $res = Work::where('id_car', $request['id_car'])
-			 ->update(['lat' => $request['latitude'],
-			 				'lng' => $request['longitude']			
-						]);
+			 ->update(['lat' => $request['latitude']],
+			 				['lng' => $request['longitude']]
+						);
 
 			if($res){
 				return response()->json(['result' => true,'data' => $res]);
