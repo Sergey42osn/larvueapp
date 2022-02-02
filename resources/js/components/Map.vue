@@ -41,6 +41,7 @@
                marker:null,
                markers:[],
                mapMarkers:[],
+               mapMarkersContents:[],
                idcar:1,
                 map:null,
                 infoWindow:null,
@@ -230,8 +231,43 @@
                   position: myLatlng,
                   icon:'/images/car.png',
                  // map:this.map,
-				 id:markerInfo.id_car,
+				          id:markerInfo.id_car,
                   title: title
+              });
+
+              this.mapMarkersContents[markerInfo.id_car] = '<div class"map_mr map_mr_wr">'
+                                                            +'<p class="map_mr_wr_name">' + markerInfo.name + '</p>'
+                                                            +'<a href="tel:+' + markerInfo.phone + '">Позвонить</a>'
+                                                            +'</div';
+
+              this.mapMarkers[markerInfo.id_car].addListener("click", (event) => {
+                  console.log(this.position);
+
+                /* infowindow = new google.maps.InfoWindow({
+                      maxWidth: 200
+                  });*/
+
+                  this.infoWindow.close();
+
+                  this.infoWindow.setContent(this.mapMarkersContents[markerInfo.id_car]);
+
+                  this.map.setCenter(myLatlng);
+
+                  this.infoWindow.open({
+                      anchor: this.mapMarkers[markerInfo.id_car],
+                      map:this.map,
+                      shouldFocus: false,
+                  });
+
+                //  infowindow.open(
+                  //   map,
+                  //   markers[key]
+                //  );
+
+                  google.maps.event.addListener(this.map, 'click', function() {
+                      this.infoWindow.close();
+                  });
+
               });
 
             //  console.log(this.mapMarkers[markerInfo.id_car]);

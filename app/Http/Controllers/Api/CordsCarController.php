@@ -32,15 +32,34 @@ class CordsCarController extends Controller
 
     	//dd($rows);
 
-		 $rows = Work::where(['status' => 1])->get();
+		$rows = Work::where(['status' => 1])->get();
 
 
     	if ($rows) {
 
+			$data =[];
+
+			foreach ($rows as $k => $value) {
+				$data[$k]['id_car'] = $value->id_car;
+				$data[$k]['name'] = $value->name;
+				$data[$k]['phone'] = $value->phone;
+				$data[$k]['lat'] = $value->lat;
+				$data[$k]['lng'] = $value->lng;
+				$data[$k]['status'] = $value->status;
+			}
+
+			//$data = [
+				//'id_car' => $rows[0]->id_car,
+				//'name' => $rows->name,
+				//'phone' => $rows->phone,
+				//'lat' => $rows->lat,
+				//'lng' => $rows->lng,
+				//'status' => $rows->status
+		//	];
+
 			return response()->json([
 				'result' => true,
-				'test'	=>true,
-				'data'	=> $rows
+				'data'	=> $data
 			],200);
 
     	}
