@@ -17,9 +17,19 @@ class CordsCarController extends Controller
 		'lng'		=> $request['longitude']
 										]);*/
     		//dd($row);
+
+			//$this->saveCorsCordCar($request);
+
+			Cord::create([
+				'id_car'    => intval($request['id_car']),
+				'lat'       => $request['latitude'],
+				'lng'       => $request['longitude'],
+				'id_status' => 1
+		  ]);
+
 			 $res = Work::where('id_car', $request['id_car'])
-			 ->update(['lat' => $request['latitude']],
-			 				['lng' => $request['longitude']]
+			 ->update(['lat' => $request['latitude'],
+			 				'lng' => $request['longitude']]
 						);
 
 			if($res){
@@ -60,15 +70,15 @@ class CordsCarController extends Controller
 						]);
     }
 
-    public function saveCorsCordCar(Request $request)
+    public function saveCorsCordCar($request)
     {
         //dd($request);
 
             //dd($row);
            $res = Cord::create([
                 'id_car'    => intval($request['id_car']),
-                'lat'       => $request['lat'],
-                'lng'       => $request['lng'],
+                'lat'       => $request['latitude'],
+                'lng'       => $request['longitude'],
                 'id_status' => 1
             ]);
 

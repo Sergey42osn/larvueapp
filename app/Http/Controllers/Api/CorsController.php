@@ -11,7 +11,7 @@ class CorsController extends Controller
 {
      public function cors(Request $request)
 	{
-		dd($request);
+		//dd($request);
 		
 	     $credentials = $request->only('email', 'password');
 

@@ -17,9 +17,10 @@ class WorkController extends Controller
 
    public function create(Request $request){
 
-     /*return response()->json([
-         'user' => $request['user']['phone']
-     ], 200);*/
+     return response()->json([
+         'result' => true,
+         'user'   => $request['user']
+     ], 200);
 
       if($request['user']){
         // $res_decode = json_decode($request['user']);
@@ -63,7 +64,7 @@ class WorkController extends Controller
 
    public function update(Request $request)
    {
-     // return response()->json(['result' => true], 200);
+    // return response()->json(['result' => true,'status' => $request['status']], 200);
 
       $res = Work::where('id_car', $request['id_car'])
 			 ->update(['status' => $request['status']]);
