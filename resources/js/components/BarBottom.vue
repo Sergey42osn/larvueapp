@@ -68,12 +68,12 @@ right: 0;
         background-color: #403838;
         padding: 5px;
     }
-    .mob_bottom_bar_box{
-        flex-basis: 25%;
-    }
      .mob_bottom_bar_box{
         display: flex;
         flex-direction: column;
+        align-items: center;
+justify-content: center;
+flex-basis: 25%;
      }
      .mob_menu_button span{
         display: inline-flex;
