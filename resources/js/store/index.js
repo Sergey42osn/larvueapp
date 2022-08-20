@@ -16,7 +16,9 @@ export default new Vuex.Store({
 		verifyemail,
 		auth,
 	},
-	actions:{},
+	actions:{
+		
+	},
 	mutations: {
 		 ADD_PAGE: (state, data) => {
 	     	//console.log(data);

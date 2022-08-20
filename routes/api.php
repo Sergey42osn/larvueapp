@@ -56,6 +56,8 @@ Route::group(['prefix' => '/v1','namespace' => 'Api','middleware' => ['api'], 'a
 
 			Route::post('/works/update', 'WorkController@update');
 
+			Route::post('/orders', 'OrdersController@get');
+
 		});
 
 	    Route::get('user', 'LoginController@user');

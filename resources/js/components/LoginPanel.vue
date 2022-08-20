@@ -12,7 +12,7 @@
               <router-link to="/profil" exact>Профиль</router-link>
             </span>
         </div>
-        <div v-else class="wrapper_content">
+        <div v-else class="wrapper_content" v-bind:class="{ active: isActive }">
             <router-link to="/login" exact>Войти</router-link>
             <router-link to="/register" exact>Зарегестрироваться</router-link>
         </div>
@@ -29,11 +29,15 @@
                     name:"",
                     admin:false,
 					profil:false
-                }
+                },
+                isActive: false,
+                body:false,
             }
         },
         mounted() {
-            console.log('Component mounted.')
+            console.log('Component mounted.');
+           // this.widthBody();
+            this.$store.dispatch('widthBody');
         },
         created(){
 
@@ -111,7 +115,7 @@
 
 
                     });
-            }
+            },
         },
          computed:{
           authState(){
@@ -120,6 +124,9 @@
           },
           auth(){
              return this.$store.getters.auth;
+          },
+          isActive(){
+            return this.$store.getters.widthBody.isActive;
           }
         }
     }
