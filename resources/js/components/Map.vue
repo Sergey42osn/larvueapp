@@ -77,6 +77,8 @@
                     lat: position.coords.latitude,
                     lng: position.coords.longitude,
                   };
+                  console.log(pos);
+                  this.setLocalStoargePosition(pos);
                   this.marker.setPosition(pos);
                   this.infoWindow.setPosition(pos);
                   this.infoWindow.setContent("Ваше местоположение.");
@@ -274,6 +276,9 @@
 
               this.mapMarkers[markerInfo.id_car].setMap(this.map);
 
+          },
+          setLocalStoargePosition(pos){
+            console.log(pos);
           }
         },
         computed:{

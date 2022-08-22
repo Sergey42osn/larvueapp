@@ -72,6 +72,7 @@
                console.log(data);
                if(data == 'yes'){
                   this.visible = true;
+                  this.$router.push('/');
                }
             },
             mobMenu(){
