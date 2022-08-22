@@ -8,6 +8,19 @@
                <p>Карта</p>
             </router-link>
          </div>
+         <div v-if="authState" class="mob_bottom_bar_box" v-bind:class="{ active: barbottmmenu.order }">            
+            <div class="mob_bottom_bar_box_order" v-on:click.prevent="order('yes')">
+               <p>Заказать</p>
+            </div>
+         </div>
+         <div v-else class="mob_bottom_bar_box" v-bind:class="{ active: barbottmmenu.order }">
+            <div class="mob_bottom_bar_box_order" v-on:click.prevent="order('no')">
+               <router-link to="/login" exact>
+                  <img src="" alt="">
+                  <p>Заказать</p>
+               </router-link>
+            </div>
+         </div>
          <div class="mob_bottom_bar_box"></div>
          <div class="mob_bottom_bar_box" v-bind:class="{ active: barbottmmenu.menu }">
             <div class="mob_bottom_bar_box_menu">
@@ -22,6 +35,15 @@
             </div>
          </div>
       </div>
+      <div class="wrapper_order_modal" v-show="visible">
+         <div class="order_modal_overlay"></div>
+         <div class="order_modal_content">
+            <div class="order_modal_content_box">
+               <p>Для заказа машины перейдите в карту и нажмите на авто</p>
+               <p class="btn btn_modal"><span v-on:click="visible=!visible">Перейти</span></p>
+            </div>
+         </div>
+      </div>
    </div>
 </template>
 
@@ -33,7 +55,8 @@
         data() {
             return {
                map:'',
-               menu:''
+               menu:'',
+               visible:false
             }
         },
         mounted() {
@@ -45,12 +68,21 @@
 
         },
         methods:{
+            order(data){
+               console.log(data);
+               if(data == 'yes'){
+                  this.visible = true;
+               }
+            },
             mobMenu(){
 
             }
         },
          computed:{
-          
+            authState(){
+             // console.log(this.$store.getters.authState.state);
+             return this.$store.getters.authState.state;
+          },          
         }
     }
 </script>
@@ -98,6 +130,50 @@ flex-basis: 25%;
   display: flex;
   justify-content: center;
   margin: 0;
+}
+.mob_bottom_bar_box_order p {
+  color: #fff;
+}
+.mob_bottom_bar_box a {
+   color:#fff;
+}
+.wrapper_order_modal {
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.order_modal_overlay {
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #000;
+  opacity: 0.6;
+}
+.order_modal_content {
+  position: relative;
+  background-color: #fff;
+  z-index: 9;
+  width: 90%;
+  padding: 10px;
+}
+.btn.btn_modal {
+  display: flex;
+  justify-content: center;
+}
+.btn.btn_modal span {
+  display: inline-flex;
+  padding: 5px 10px;
+  background-color: #3e3e3e;
+  color: #fff;
 }
      @media(min-width: 768px) {
         .wrapper_app_mob_bottom_bar {

@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 import Home from './components/Home.vue';
 import Login from './components/Login.vue';
 import Menu from './components/Menu.vue';
+import MenuLogin from './components/menu/MenuLogin.vue';
 import Profil from './components/Profil.vue';
 import Register from './components/Register.vue';
 import Admin from './components/admin/Admin.vue';
@@ -34,6 +35,10 @@ export default new VueRouter({
 		{
 			path: '/menu',
 			component : Menu
+		},
+		{
+			path: '/menu/login',
+			component : MenuLogin
 		},
 		{
 			path: '/profil',

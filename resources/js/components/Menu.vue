@@ -46,7 +46,7 @@
             if(!this.authState){
                // this.$route("/login");
 
-                this.$router.push('/login');
+                this.$router.push('/menu/login');
             }
         },
         methods:{

@@ -1,84 +1,87 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <div v-if="register" class="wrapper_info success"><p>{{ messageInfo }}</p></div>
-                <div class="box_flex flex_column wrapper_content">
-                    <div class="panel-heading">Авторизация</div>
-                   
-                    <div class="alert alert-info" v-if="info">{{ message }}</div>
-                    <div class="alert alert-danger" v-if="errors.info">{{ message }}</div>
-                    <div class="alert alert-success" v-if="success.info">{{ message }}</div>
-                    <div class="panel-body">
-                        <form v-on:submit.prevent="saveForm" class="form-horizontal form_login" method="POST" action="" novalidate="">
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <input
-                                    id="email"
-                                    type="email"
-                                    class="form-control"
-                                    v-model="email"
-                                    data-required="Введите email"
-                                    v-on:change="chang($event)"
-                                    v-on:keyup="chang($event)"
-                                    v-on:onfocus="chang($event)"
-                                    value=""
-                                    placeholder="Введите e-mail"
-                                    v-on:click="chang($event)"
-                                    autofocus>
-                                    <span v-if="errors.email" class="help-block help_block_validate">
-                                        <strong>{{ errors.email }}</strong>
-                                    </span>
+    <div class="component_container login">
+        <span class="span_close" v-on:click.prevent="closeMenuLogin">x</span>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div v-if="register" class="wrapper_info success"><p>{{ messageInfo }}</p></div>
+                    <div class="box_flex flex_column wrapper_content">
+                        <div class="panel-heading">Авторизация</div>
+                    
+                        <div class="alert alert-info" v-if="info">{{ message }}</div>
+                        <div class="alert alert-danger" v-if="errors.info">{{ message }}</div>
+                        <div class="alert alert-success" v-if="success.info">{{ message }}</div>
+                        <div class="panel-body">
+                            <form v-on:submit.prevent="saveForm" class="form-horizontal form_login" method="POST" action="" novalidate="">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <input
+                                        id="email"
+                                        type="email"
+                                        class="form-control"
+                                        v-model="email"
+                                        data-required="Введите email"
+                                        v-on:change="chang($event)"
+                                        v-on:keyup="chang($event)"
+                                        v-on:onfocus="chang($event)"
+                                        value=""
+                                        placeholder="Введите e-mail"
+                                        v-on:click="chang($event)"
+                                        autofocus>
+                                        <span v-if="errors.email" class="help-block help_block_validate">
+                                            <strong>{{ errors.email }}</strong>
+                                        </span>
 
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <input
-                                    id="password"
-                                    type="password"
-                                    class="form-control"
-                                    name="password"
-                                    v-model="password"
-                                    data-required="Введите пароль"
-                                    v-on:change="chang($event)"
-                                    v-on:keyup="chang($event)"
-                                    v-on:onfocus="chang($event)"
-                                    placeholder="Введите пароль">         
-                                    <span v-if="errors.password" class="help-block help_block_validate">
-                                        <strong>{{ errors.password }}</strong>
-                                    </span>
-              
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="remember">Remember Me
-                                        </label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <div class="loginboxbtn_login">
-                                        <button type="submit" class="btn btn-primary loginboxbtn_submit">
-                                        Войти
-                                    </button>
-                                    <a class="btn btn-primary loginboxbtn_reset" href="">
-                                        Восстановить пароль?
-                                    </a>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <input
+                                        id="password"
+                                        type="password"
+                                        class="form-control"
+                                        name="password"
+                                        v-model="password"
+                                        data-required="Введите пароль"
+                                        v-on:change="chang($event)"
+                                        v-on:keyup="chang($event)"
+                                        v-on:onfocus="chang($event)"
+                                        placeholder="Введите пароль">         
+                                        <span v-if="errors.password" class="help-block help_block_validate">
+                                            <strong>{{ errors.password }}</strong>
+                                        </span>
+                
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <div class="col-md-6 col-md-offset-4">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="remember">Remember Me
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <div class="loginboxbtn_login">
+                                            <button type="submit" class="btn btn-primary loginboxbtn_submit">
+                                            Войти
+                                        </button>
+                                        <a class="btn btn-primary loginboxbtn_reset" href="">
+                                            Восстановить пароль?
+                                        </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                <div class="loginboxbtn">
+                                    <router-link to="/register" class="btn btn-primary loginboxbtn_register">Зарегестрироваться</router-link>
+                                
+                                </div>
                             </div>
-                            <div class="col-sm-12">
-                            <div class="loginboxbtn">
-                                <router-link to="/register" class="btn btn-primary loginboxbtn_register">Зарегестрироваться</router-link>
-                            
-                            </div>
+                            </form>
                         </div>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -268,6 +271,9 @@ import axios from 'axios';
                 this.$store.commit('UPDATE_VERIFYEMAIL_STATE',data);
 
                  this.$router.push('/email/verify/notic/');
+            },
+            closeMenuLogin(){
+                this.$router.push('/');
             }
         },
         computed:{
@@ -285,11 +291,28 @@ import axios from 'axios';
     display: flex;
     justify-content: center;
 }
-..wrapper_info.success p {
+.wrapper_info.success p {
     color:green;
 }
-
+.component_container.login {
+    position: relative;
+}
 @media(max-width: 768px) {
+.component_container.login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loginboxbtn_login {
+  display: flex;
+  flex-direction: column;
+  gap: 20px 0;
+}
+.loginboxbtn_register {
+  display: flex;
+  justify-content: center;
+}
 .panel-heading {
   margin: 20px 0;
   text-align: center;

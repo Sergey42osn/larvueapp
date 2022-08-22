@@ -37,7 +37,7 @@
         mounted() {
             console.log('Component mounted.');
            // this.widthBody();
-            this.$store.dispatch('widthBody');
+          //  this.$store.dispatch('widthBody');
         },
         created(){
 
@@ -124,9 +124,6 @@
           },
           auth(){
              return this.$store.getters.auth;
-          },
-          isActive(){
-            return this.$store.getters.widthBody.isActive;
           }
         }
     }
